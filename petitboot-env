@@ -1,0 +1,4 @@
+#!/bin/bash
+__PWD=`pwd`
+
+export BR2_EXTERNAL=${__PWD}
