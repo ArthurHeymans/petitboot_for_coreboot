@@ -49,5 +49,4 @@ cbfstool coreboot.rom add-payload -f bzImage -n img/petitboot -C [command line a
 
 Another way is to use linux as a payload in coreboot.
 
-## know problems
-Currently petitboot does run `kexec -e` correctly. Exiting to shell and running that command after having selected the option you want to boot works though.
+## known problems
