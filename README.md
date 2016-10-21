@@ -50,3 +50,4 @@ cbfstool coreboot.rom add-payload -f bzImage -n img/petitboot -C [command line a
 Another way is to use linux as a payload in coreboot.
 
 ## known problems
+You can sometimes only see a part of the petitboot tui. Hitting CTRL + l to clear the screen fixes this.
