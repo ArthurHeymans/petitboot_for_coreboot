@@ -51,3 +51,16 @@ Another way is to use linux as a payload in coreboot.
 
 ## known problems
 You can sometimes only see a part of the petitboot tui. Hitting CTRL + l to clear the screen fixes this.
+
+## customize buildroot, linux
+To customize buildroot, run in the petitboot\_for\_coreboot directory:
+
+```bash
+make -C buildroot/ menuconfig
+```
+
+To customize linux, run:
+
+```bash
+make -C buildroot/ linux-menuconfig
+```
