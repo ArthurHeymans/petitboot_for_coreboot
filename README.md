@@ -1,4 +1,5 @@
-# Petitboot for coreboot
+Petitboot for coreboot
+======================
 
 ## about petitboot
 Petitboot is a platform independent bootloader based on the Linux kexec warm reboot mechanism.Petitboot supports loading kernel, initrd and device tree files from any Linux mountable filesystem, plus can load files from the network using the FTP, SFTP, TFTP, NFS, HTTP and HTTPS protocols. Petitboot can boot any operating system that includes kexec boot support.
@@ -51,6 +52,7 @@ Another way is to use linux as a payload in coreboot.
 
 ## known problems
 You can sometimes only see a part of the petitboot tui. Hitting CTRL + l to clear the screen fixes this.
+Adding `console=ttyS1` to the linux command line arguments also fixes this problem, by having the boot messages on a different, unused console.
 
 ## customize buildroot, linux
 To customize buildroot, run in the petitboot\_for\_coreboot directory:
