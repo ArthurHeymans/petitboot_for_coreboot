@@ -6,7 +6,7 @@
 
 PETITBOOT_VERSION = v1.3.0
 PETITBOOT_SITE ?= $(call github,open-power,petitboot,$(PETITBOOT_VERSION))
-PETITBOOT_DEPENDENCIES = ncurses udev host-bison host-flex lvm2
+PETITBOOT_DEPENDENCIES = ncurses udev host-bison host-flex lvm2 libgpgme
 PETITBOOT_LICENSE = GPLv2
 PETITBOOT_LICENSE_FILES = COPYING
 
