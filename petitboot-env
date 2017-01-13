@@ -2,3 +2,4 @@
 __PWD=`pwd`
 
 export BR2_EXTERNAL=${__PWD}
+export BR2_EXTERNAL_petitboot_PATH=${__PWD}

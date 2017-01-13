@@ -1,1 +1,1 @@
-source "$BR2_EXTERNAL/package/Config.in"
+source "$BR2_EXTERNAL_petitboot_PATH/package/Config.in"
