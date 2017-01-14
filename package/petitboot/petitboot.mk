@@ -6,7 +6,7 @@
 
 PETITBOOT_VERSION = v1.3.1
 PETITBOOT_SITE ?= $(call github,open-power,petitboot,$(PETITBOOT_VERSION))
-PETITBOOT_DEPENDENCIES = ncurses udev host-bison host-flex lvm2 libgpgme
+PETITBOOT_DEPENDENCIES = ncurses udev host-bison host-flex lvm2
 PETITBOOT_LICENSE = GPLv2
 PETITBOOT_LICENSE_FILES = COPYING
 
@@ -14,14 +14,15 @@ PETITBOOT_AUTORECONF = YES
 PETITBOOT_AUTORECONF_OPTS = -i
 PETITBOOT_GETTEXTIZE = NO
 PETITBOOT_CONF_OPTS += --with-ncurses --without-twin-x11 --without-twin-fbdev \
-	      --localstatedir=/var --with-signed-boot \
+	      --localstatedir=/var \
 	      HOST_PROG_KEXEC=/usr/sbin/kexec \
 	      $(if $(BR2_PACKAGE_BUSYBOX),--with-tftp=busybox)
 
-PETITBOOT_CONF_ENV += \
-	ac_cv_path_GPGME_CONFIG=$(STAGING_DIR)/usr/bin/gpgme-config
-
-
+ifeq ($(BR2_PACKAGE_LIBGPGME),y)
+	PETITBOOT_CONF_OPTS += --with-signed-boot
+	PETITBOOT_CONF_ENV += \
+		ac_cv_path_GPGME_CONFIG=$(STAGING_DIR)/usr/bin/gpgme-config
+endif
 
 ifdef PETITBOOT_DEBUG
 	PETITBOOT_CONF_OPTS += --enable-debug
