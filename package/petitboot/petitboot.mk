@@ -12,7 +12,7 @@ PETITBOOT_LICENSE_FILES = COPYING
 
 PETITBOOT_AUTORECONF = YES
 PETITBOOT_AUTORECONF_OPTS = -i
-PETITBOOT_GETTEXTIZE = YES
+PETITBOOT_GETTEXTIZE = NO
 PETITBOOT_CONF_OPTS += --with-ncurses --without-twin-x11 --without-twin-fbdev \
 	      --localstatedir=/var --with-signed-boot \
 	      HOST_PROG_KEXEC=/usr/sbin/kexec \
@@ -21,10 +21,6 @@ PETITBOOT_CONF_OPTS += --with-ncurses --without-twin-x11 --without-twin-fbdev \
 PETITBOOT_CONF_ENV += \
 	ac_cv_path_GPGME_CONFIG=$(STAGING_DIR)/usr/bin/gpgme-config
 
-ifeq ($(BR2_NEEDS_GETTEXT_IF_LOCALE),y)
-	PETITBOOT_DEPENDENCIES += gettext
-	PETITBOOT_CONF_OPTS += LIBS=-lintl
-endif
 
 
 ifdef PETITBOOT_DEBUG
@@ -73,7 +69,6 @@ define PETITBOOT_POST_INSTALL
 
 	mkdir -p $(TARGET_DIR)/var/log/petitboot
 
-	$(MAKE) -C $(@D)/po DESTDIR=$(TARGET_DIR) install
 endef
 
 ifeq ($(BR2_PACKAGE_DTC),y)
