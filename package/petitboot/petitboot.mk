@@ -18,7 +18,7 @@ PETITBOOT_CONF_OPTS += --with-ncurses --without-twin-x11 --without-twin-fbdev \
 	      HOST_PROG_KEXEC=/usr/sbin/kexec \
 	      $(if $(BR2_PACKAGE_BUSYBOX),--with-tftp=busybox)
 
-PETITBOOT_CONF_ENV +=
+PETITBOOT_CONF_ENV += \
 	ac_cv_path_GPGME_CONFIG=$(STAGING_DIR)/usr/bin/gpgme-config
 
 ifeq ($(BR2_NEEDS_GETTEXT_IF_LOCALE),y)
