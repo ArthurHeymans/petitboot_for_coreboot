@@ -1,0 +1,24 @@
+diff --git a/discover/platform.c b/discover/platform.c
+index cc6306f..aeb51e6 100644
+--- a/discover/platform.c
++++ b/discover/platform.c
+@@ -12,6 +12,10 @@
+ 
+ #include "platform.h"
+ 
++#ifndef AUTOBOOT_TIMEOUT
++#define AUTOBOOT_TIMEOUT 3
++#endif
++
+ void			*platform_ctx;
+ static struct platform	*platform;
+ static struct config	*config;
+@@ -120,7 +124,7 @@ void config_set_defaults(struct config *config)
+ 	const char *lang;
+ 
+ 	config->autoboot_enabled = true;
+-	config->autoboot_timeout_sec = 10;
++	config->autoboot_timeout_sec = AUTOBOOT_TIMEOUT;
+ 	config->autoboot_enabled = true;
+ 	config->network.interfaces = NULL;
+ 	config->network.n_interfaces = 0;
