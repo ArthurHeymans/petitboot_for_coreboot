@@ -39,7 +39,7 @@ make petitboot_defconfig
 make
 ```
 
-The resulting bzImage will be in `output/image/bzImage`
+The resulting bzImage will be in `output/images/bzImage`
 
 ## How to integrate with coreboot
 The simplest way is it add it as `img/petitboot` and load it from SeaBIOS. That way you have a fallback mechanism in case something is wrong with petitboot.
