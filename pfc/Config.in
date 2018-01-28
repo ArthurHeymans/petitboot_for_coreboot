@@ -1,0 +1,1 @@
+source "$BR2_EXTERNAL_PFC_PATH/package/Config.in"

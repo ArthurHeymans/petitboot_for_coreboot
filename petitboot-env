@@ -1,4 +1,16 @@
 #!/bin/bash
 __PWD=`pwd`
 
-export BR2_EXTERNAL=${__PWD}
+
+if [ ! -e buildroot/Makefile ]; then
+	echo "Please make sure you've checked out the buildroot submodule"
+	echo "  git submodule init && git submodule update"
+	return -1
+fi
+
+export BR2_EXTERNAL=${__PWD}/pfc
+export BR2_DL_DIR=${__PWD}/dl
+
+pfc-build () {
+    make --directory=${__PWD}/buildroot O=${__PWD}/output $@
+}

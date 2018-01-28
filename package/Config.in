@@ -1,3 +1,0 @@
-menu "Petitboot"
-	source "$BR2_EXTERNAL/package/petitboot/Config.in"
-endmenu

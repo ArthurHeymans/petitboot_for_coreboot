@@ -34,9 +34,8 @@ source petitboot-env
 Configure and let buildroot do its thing
 
 ```bash
-cd buildroot
-make petitboot_defconfig
-make
+pfc-build petitboot_defconfig
+pfc-build
 ```
 
 The resulting bzImage will be in `output/images/bzImage`
