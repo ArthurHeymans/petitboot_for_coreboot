@@ -1,0 +1,141 @@
+diff -urN petitboot-v1.3.1.orig/discover/pb-discover.c petitboot-v1.3.1/discover/pb-discover.c
+diff --git a/discover/pb-discover.c b/discover/pb-discover.c
+index c1f712f..446f36c 100644
+--- a/discover/pb-discover.c
++++ b/discover/pb-discover.c
+@@ -128,10 +128,6 @@ int main(int argc, char *argv[])
+ 	struct opts opts;
+ 	FILE *log;
+ 
+-	setlocale(LC_ALL, "");
+-	bindtextdomain(PACKAGE, LOCALEDIR);
+-	textdomain(PACKAGE);
+-
+ 	if (opts_parse(&opts, argc, argv)) {
+ 		print_usage();
+ 		return EXIT_FAILURE;
+@@ -182,8 +182,8 @@
+ 	if (opts.no_autoboot == opt_yes)
+ 		config_set_autoboot(false);
+ 
+-	if (config_get()->lang)
+-		setlocale(LC_ALL, config_get()->lang);
++	// if (config_get()->lang)
++	//	setlocale(LC_ALL, config_get()->lang);
+ 
+ 	if (config_get()->debug)
+ 		pb_log_set_debug(true);
+diff -urN petitboot-v1.3.1.orig/lib/security/gpg.c petitboot-v1.3.1/lib/security/gpg.c
+--- petitboot-v1.3.1.orig/lib/security/gpg.c	2016-10-11 11:39:42.000000000 +0800
++++ petitboot-v1.3.1/lib/security/gpg.c	2017-01-14 12:58:26.385921258 +0800
+@@ -80,9 +80,9 @@
+ 	gpgme_error_t err;
+ 
+ 	/* Initialize gpgme */
+-	setlocale (LC_ALL, "");
++	// setlocale (LC_ALL, "");
+ 	gpgme_check_version(NULL);
+-	gpgme_set_locale(NULL, LC_CTYPE, setlocale (LC_CTYPE, NULL));
++	// gpgme_set_locale(NULL, LC_CTYPE, setlocale (LC_CTYPE, NULL));
+ 	err = gpgme_engine_check_version(GPGME_PROTOCOL_OpenPGP);
+ 	if (err != GPG_ERR_NO_ERROR) {
+ 		pb_log("%s: OpenPGP support not available\n", __func__);
+@@ -249,9 +249,9 @@
+ 		return -1;
+ 
+ 	/* Initialize gpgme */
+-	setlocale (LC_ALL, "");
++	// setlocale (LC_ALL, "");
+ 	gpgme_check_version(NULL);
+-	gpgme_set_locale(NULL, LC_CTYPE, setlocale (LC_CTYPE, NULL));
++	// gpgme_set_locale(NULL, LC_CTYPE, setlocale (LC_CTYPE, NULL));
+ 	err = gpgme_engine_check_version(GPGME_PROTOCOL_OpenPGP);
+ 	if (err != GPG_ERR_NO_ERROR) {
+ 		pb_log("%s: OpenPGP support not available\n", __func__);
+@@ -570,4 +570,4 @@
+ 	free(auth_sig_line);
+ 
+ 	return ret;
+-}
+\ No newline at end of file
++}
+diff -urN petitboot-v1.3.1.orig/ui/ncurses/nc-cui.c petitboot-v1.3.1/ui/ncurses/nc-cui.c
+--- petitboot-v1.3.1.orig/ui/ncurses/nc-cui.c	2016-10-11 11:39:42.000000000 +0800
++++ petitboot-v1.3.1/ui/ncurses/nc-cui.c	2017-01-14 12:59:37.734171706 +0800
+@@ -740,6 +740,7 @@
+ 	cui_update_mm_title(cui);
+ }
+ 
++#if 0
+ static void cui_update_language(struct cui *cui, char *lang)
+ {
+ 	bool repost_menu;
+@@ -766,14 +767,15 @@
+ 
+ 	discover_client_enumerate(cui->client);
+ }
++#endif
+ 
+ static void cui_update_config(struct config *config, void *arg)
+ {
+ 	struct cui *cui = cui_from_arg(arg);
+ 	cui->config = talloc_steal(cui, config);
+ 
+-	if (config->lang)
+-		cui_update_language(cui, config->lang);
++	//if (config->lang)
++	//	cui_update_language(cui, config->lang);
+ 
+ 	if (cui->subset_screen)
+ 		subset_screen_update(cui->subset_screen);
+diff --git a/lib/i18n/i18n.h b/lib/i18n/i18n.h
+index dde02f1..32548e1 100644
+--- a/lib/i18n/i18n.h
++++ b/lib/i18n/i18n.h
+@@ -18,9 +18,8 @@
+ #ifndef I18N_H
+ #define I18N_H
+ 
+-#include <libintl.h>
+-
+ #define _(x) gettext(x)
++#define gettext(x) (x)
+ 
+ int strncols(const char *str);
+ 
+diff --git a/Makefile.am b/Makefile.am
+index 15d561f..5fe3696 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -14,7 +14,7 @@
+ 
+ AUTOMAKE_OPTIONS = foreign subdir-objects parallel-tests
+ 
+-SUBDIRS = po
++SUBDIRS =
+ 
+ ACLOCAL_AMFLAGS = -I m4
+ 
+diff --git a/ui/ncurses/generic-main.c b/ui/ncurses/generic-main.c
+index 7062796..c349efc 100644
+--- a/ui/ncurses/generic-main.c
++++ b/ui/ncurses/generic-main.c
+@@ -30,7 +30,6 @@
+ #include <string.h>
+ #include <limits.h>
+ #include <sys/time.h>
+-#include <libintl.h>
+ #include <locale.h>
+ 
+ #include "log/log.h"
+@@ -198,10 +197,6 @@ int main(int argc, char *argv[])
+ 
+ 	result = opts_parse(&opts, argc, argv);
+ 
+-	setlocale(LC_ALL, "");
+-	bindtextdomain(PACKAGE, LOCALEDIR);
+-	textdomain(PACKAGE);
+-
+ 	if (result) {
+ 		print_usage();
+ 		return EXIT_FAILURE;
