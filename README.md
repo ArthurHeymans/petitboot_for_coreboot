@@ -53,7 +53,7 @@ Another way is to use linux as a payload in coreboot.
 You can sometimes only see a part of the petitboot tui. Hitting CTRL + l to clear the screen fixes this.
 Adding `console=ttyS1` to the linux command line arguments also fixes this problem, by having the boot messages on a different, unused console.
 
-When calling kexec to load a new kernel, the new kernel does not necesseraly have an available framebuffer.
+When calling kexec to load a new kernel, the new kernel may not necessarily provide an available framebuffer.
 If you set up disk encryption this might be a problem since you cannot see the password prompt.
 To work around this you can add a KMS module like i915 to you distro's bzImage or initrd.
 
